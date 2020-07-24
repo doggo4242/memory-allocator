@@ -6,13 +6,27 @@
 #endif
 using namespace std;
 
+int *x;
+
+void handler(int sig)
+{
+	free(x);
+	exit(1);
+}
+
 int main()
 {
+	signal(SIGINT, handler);
+	signal(SIGHUP, handler);
+	signal(SIGQUIT, handler);
+	signal(SIGABRT, handler);
+	signal(SIGKILL, handler);
+	signal(SIGTERM, handler);
 	int r;
 	cout << "How much ram should be used in GB?" << endl;
 	cin >> r;
 	cout << r << endl;
-	int *x = (int*)(malloc(r*10000000000));
+	x = (int*)(malloc(r*10000000000));
 	if(x==NULL)
 	{
 		cout << "allocation failed, please retry";
@@ -32,7 +46,7 @@ int main()
 	{
 		x[i]=0;
 	}
-	cout << "allocation complete, enter \'c\' or Ctrl-C to deallocate" << endl;
+	cout << "memory filled, enter \'c\' or Ctrl-C to deallocate" << endl;
 	while(true)
 	{
 		if(getchar() == 'c')
