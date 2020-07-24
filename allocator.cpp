@@ -16,12 +16,16 @@ void handler(int sig)
 
 int main()
 {
-	signal(SIGINT, handler);
+#ifndef _WIN32
 	signal(SIGHUP, handler);
 	signal(SIGQUIT, handler);
-	signal(SIGABRT, handler);
 	signal(SIGKILL, handler);
+#else
+	signal(SIGBREAK,handler);
+#endif
+	signal(SIGABRT, handler);
 	signal(SIGTERM, handler);
+	signal(SIGINT, handler);
 	int r;
 	cout << "How much ram should be used in GB?" << endl;
 	cin >> r;
