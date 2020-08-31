@@ -29,7 +29,7 @@ void handler(int sig)
 	exit(1);
 }
 
-int main()
+int main(int argc, char *argv[])
 {
 #ifndef _WIN32
 	signal(SIGHUP, handler);
@@ -42,9 +42,16 @@ int main()
 	signal(SIGTERM, handler);
 	signal(SIGINT, handler);
 	int r;
-	cout << "How much ram should be used in GB?" << endl;
-	cin >> r;
-	cout << r << endl;
+	if(argc>1)
+	{
+		r=atoi(argv[1]);
+	}
+	else
+	{
+		cout << "How much ram should be used in GB?" << endl;
+		cin >> r;
+		cout << r << endl;
+	}
 	x = (int*)(malloc(r*10000000000));
 	if(x==NULL)
 	{
@@ -66,7 +73,7 @@ int main()
 		x[i]=0;
 	}
 	cout << "memory filled, enter \'c\' or Ctrl-C to deallocate" << endl;
-	while(true)
+	while(1)
 	{
 		if(getchar() == 'c')
 		{
