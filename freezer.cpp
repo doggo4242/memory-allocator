@@ -22,9 +22,11 @@ Copyright 2020 doggo4242 Development
 using namespace std;
 
 int *x;
-
+int lu[]={SIGHUP,SIGQUIT,SIGKILL,SIGABRT,SIGTERM,SIGINT};
 void handler(int sig)
 {
+	int *p=find(lu,lu+6,sig);
+	cout << *p << endl;
 	free(x);
 	exit(1);
 }
@@ -41,6 +43,10 @@ int main(int argc, char *argv[])
 	signal(SIGABRT, handler);
 	signal(SIGTERM, handler);
 	signal(SIGINT, handler);
+	for(int i = 0;i<sizeof(lu)/sizeof(int);i++)
+	{
+		cout << lu[i] << endl;
+	}
 	int r;
 	if(argc>1)
 	{
