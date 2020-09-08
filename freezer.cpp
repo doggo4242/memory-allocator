@@ -27,10 +27,7 @@ int lu[]={SIGBREAK,SIGABRT,SIGTERM,SIGINT};
 #endif
 void handler(int sig)
 {
-	#ifdef __WIN32
-	int *p=find(lu,lu+4,sig);
-	cout << *p << endl;
-	#endif
+	cout << sig << endl;
 	free(x);
 	exit(1);
 }
