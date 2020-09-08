@@ -28,7 +28,6 @@ jobs:
           sudo apt update
           sudo apt install -y mingw-w64 g++
           cd $GITHUB_WORKSPACE
-          mkdir build
           cd build
           x86_64-w64-mingw32-g++ -o freezer-win.exe ../freezer.cpp
           g++ -o freezer-linux ../freezer.cpp
